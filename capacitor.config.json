@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Engage",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

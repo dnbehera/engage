@@ -1,0 +1,8 @@
+{
+  "name": "Engage",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "c28ad3e8"
+}
