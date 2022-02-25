@@ -4,17 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { JoditAngularModule } from 'jodit-angular';
 
-import { FolderPage } from './folder.page';
+import { EmailPageRoutingModule } from './email-routing.module';
+
+import { EmailPage } from './email.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    JoditAngularModule,
+    EmailPageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [EmailPage]
 })
-export class FolderPageModule {}
+export class EmailPageModule {}

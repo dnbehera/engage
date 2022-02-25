@@ -1,15 +1,25 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ListComponent } from './contacts/list/list.component';
+import { HistoryComponent } from './reports/history/history.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'email/Compose',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'email/:id',
+    loadChildren: () => import('./email/email.module').then( m => m.EmailPageModule)
+  },
+  {
+    path: 'contacts',
+    component: ListComponent
+  },
+  {
+    path: 'history',
+    component: HistoryComponent
   }
 ];
 
