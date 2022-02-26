@@ -1,0 +1,6 @@
+.btn-container {
+    display: flex;
+    & .btn-send {
+        margin-left: auto;
+    }
+}

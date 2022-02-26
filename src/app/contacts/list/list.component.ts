@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
+import { Contact, Email } from 'src/app/Shared/common.types';
+import { AppStateServiceService } from 'src/app/Shared/services/app-state-service.service';
+import { CommonService } from '../../Shared/services/common.service';
 
 declare var XLSX;
 
@@ -10,17 +13,21 @@ declare var XLSX;
 })
 export class ListComponent implements OnInit {
 
- 
+  gridApi: GridApi;
+  selectedContacts: Array<Contact>;
+  rowSelection: string = 'multiple';
+  public defaultColDef: ColDef = {
+    flex: 1,
+    minWidth: 100
+  };
 
+  constructor(private service: CommonService, private stateService: AppStateServiceService) { }
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
-    
-    
-
-  }
-
+  onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
+  }  
   importFile(e: any) {
 
     let file: File = e.target.files[0];
@@ -44,16 +51,25 @@ export class ListComponent implements OnInit {
   }
 
 columnDefs: ColDef[] = [
-    { field: 'name' },
-    { field: 'email' },
-    { field: 'price'}
+    { field: 'name', 
+    checkboxSelection: true },
+    { field: 'email' }
 ];
 
 
 rowData = [
-  { name: 'Test1', email: 'email@gmail.com', price: 35000 },
-  { name: 'Test2', email: 'email@gmail.com', price: 32000 },
-  { name: 'Test3', email: 'email@gmail.com', price: 72000 }
+  { name: 'Test1', email: 'email@gmail.com'},
+  { name: 'Test2', email: 'email@gmail.com' },
+  { name: 'Test3', email: 'email@gmail.com' }
 ];
+
+
+sendEmail() {
+  let emailContent: Email = this.stateService.getEmail();
+  this.selectedContacts = this.gridApi.getSelectedRows();
+  this.service.sendEmail(emailContent, this.selectedContacts).subscribe( (resp) => {
+    console.log("Email Sent");
+  });
+}
 
 }

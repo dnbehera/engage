@@ -23,19 +23,18 @@
   </ion-header>
 
   <div id="container">
-
     <ion-item>
       <ion-label position="stacked">
         Email Subject
       </ion-label>
-      <ion-input placeholder="Enter Subject"></ion-input>
+      <ion-input placeholder="Enter Subject" [(ngModel)]="email.subject"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">
         Email Body
       </ion-label>
-      <ion-textarea placeholder="Enter Email Body here..." rows="20" cols="20"></ion-textarea>
+      <ion-textarea placeholder="Enter Email Body here..." rows="20" cols="20" [(ngModel)]="email.body"></ion-textarea>
     </ion-item>
     <!-- <ion-item>
       <ion-label position="stacked">
@@ -44,7 +43,7 @@
       <jodit-editor style="width: 100%"></jodit-editor> 
     </ion-item> -->
     <ion-item lines="none">
-      <ion-button slot="end" color="primary" router-direction="forward">
+      <ion-button slot="end" color="primary" router-direction="forward" [routerLink]="['/contacts']" routerLinkActive="router-link-active" (click)="onNext()" >
         Next
         <ion-icon name="caret-forward-outline"></ion-icon>
       </ion-button>

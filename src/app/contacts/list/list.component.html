@@ -1,18 +1,19 @@
-
 <!--Upload contacts-->
 <ion-item>
   <ion-label position="stacked">Upload Contacts</ion-label>
   <ion-input type="file" accept="XLXS" value="" (change)="importFile($event)"></ion-input>
 </ion-item>
 
-  <ag-grid-angular
-    style="width: 500px; height: 500px;"
-    class="ag-theme-alpine"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
->
+<ag-grid-angular style="width: 500px; height: 500px;" class="ag-theme-alpine" [rowData]="rowData"
+  [columnDefs]="columnDefs" [rowSelection]="rowSelection" [defaultColDef]="defaultColDef"
+  (gridReady)="onGridReady($event)"
+  >
 </ag-grid-angular>
-
-<ion-item>
-  <ion-button router-direction="back">Back</ion-button>
-</ion-item>
+<div class="btn-container">
+  <ion-item>
+    <ion-button router-direction="back" [routerLink]="['/email/compose']">Back</ion-button>
+  </ion-item>
+  <ion-item class="btn-send">
+    <ion-button (click)="sendEmail()">Send</ion-button>
+  </ion-item>
+</div>
