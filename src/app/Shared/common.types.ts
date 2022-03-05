@@ -7,7 +7,8 @@ export interface Email {
 export interface Contact {
     name?: string,
     email?: string,
-    ccEmail?: string
+    ccEmail?: string,
+    selected?: boolean
 }
 
 export interface EmailPayload {
@@ -16,7 +17,7 @@ export interface EmailPayload {
 }
 
 export class AppState {
-    selectedContacts?: Array<Contact>;
+    contacts?: Array<Contact>;
     emailContent?: Email
 }
 

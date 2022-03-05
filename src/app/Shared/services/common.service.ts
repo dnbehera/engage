@@ -5,6 +5,9 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 
+declare var XLSX;
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,5 +44,51 @@ export class CommonService {
     }
     // Return an observable with a user-facing error message.
     return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  importFile(e: any, columns: any, callBack: any ) {
+
+    let file: File = e.target.files[0];
+    if (!file) { return; }
+
+    let reader = new FileReader();
+    reader.onload = (uploadedFile: any) => {
+
+      let data = new Uint8Array(uploadedFile.target.result);
+      let arr = [];
+
+      for (let i = 0; i !== data.length; ++i) {
+        arr[i] = String.fromCharCode(data[i]);
+      }
+
+      let bstr = arr.join('');
+      let workbook = XLSX.read(bstr, { type: 'binary' });
+      let sheetName: string = workbook?.SheetNames[0];
+      let worksheet = workbook.Sheets[sheetName];
+
+     
+
+      var rowData = [];
+
+      // start at the 2nd row - the first row are the headers
+      var rowIndex = 2;
+
+      // iterate over the worksheet pulling out the columns we're expecting
+      while (worksheet['A' + rowIndex]) {
+        var row = {};
+        Object.keys(columns).forEach(function (column) {
+          row[columns[column]] = worksheet[column + rowIndex].w;
+        });
+
+        rowData.push(row);
+
+        rowIndex++;
+      }
+
+      // finally, set the imported rowData into the grid
+      callBack(rowData);
+    };
+
+    reader.readAsArrayBuffer(file);
   }
 }

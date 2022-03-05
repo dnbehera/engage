@@ -1,7 +1,7 @@
 <!--Upload contacts-->
 <ion-item>
   <ion-label position="stacked">Upload Contacts</ion-label>
-  <ion-input type="file" accept="XLXS" value="" (change)="importFile($event)"></ion-input>
+  <ion-input type="file" accept="XLXS" value="" (change)="importFromExcel($event)"></ion-input>
 </ion-item>
 
 <ag-grid-angular style="width: 500px; height: 500px;" class="ag-theme-alpine" [rowData]="rowData"

@@ -10,18 +10,18 @@ export class AppStateServiceService {
   constructor() { }
 
   getEmail() {
-    return  this.state.emailContent;
+    return  {...this.state.emailContent};
   }
 
   setEmail(email: Email) {
-    this.state.emailContent = email;
+    this.state.emailContent = { ...email};
   }
 
-  getSelectedContacts() {
-    return this.state.selectedContacts;
+  getContacts() {
+    return { ...this.state.contacts};
   }
 
-  setSelectedContacts(contacts: Array<Contact>) {
-    this.state.selectedContacts = contacts;
+  setContacts(contacts: Array<Contact>) {
+    this.state.contacts = {...contacts};
   }
 }

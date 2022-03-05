@@ -18,6 +18,7 @@ export class EmailPage implements OnInit {
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    this.email = this.stateService.getEmail();
   }
 
   onNext() {
